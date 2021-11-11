@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="WPFTestApplication.Views.XamlTesterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFTestApplication.Views"
+             xmlns:converters="clr-namespace:WPFTestApplication.Converters"
+             xmlns:viewmodels="clr-namespace:WPFTestApplication.ViewModels"
+             xmlns:binding="clr-namespace:WPFTestApplication.Binding"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewmodels:XamlTesterViewModel />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <converters:WidthConverter x:Key="widthConverter" />
+        <binding:DataContextProxy DataSource="{Binding}" x:Key="BindingProxy" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ListView 
+            Grid.Column="0" 
+            HorizontalContentAlignment="Stretch" 
+            ItemsSource="{Binding SelectedPeople}"
+            ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox 
+                                        ItemsSource="{Binding DataSource.People , Source={StaticResource BindingProxy}}"
+                                        DisplayMemberPath="{Binding NickName}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumn.Header>
+                                <TextBlock Text="{Binding DataSource.ColOneHeader , Source={StaticResource BindingProxy}}" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>
