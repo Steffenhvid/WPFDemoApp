@@ -46,18 +46,6 @@ namespace WPFTestApplication
         {
             services.AddSingleton<IMockedData, MockedData>();
             services.AddSingleton<IPersonService, PersonService>();
-            //services.AddSingleton<Person2Service>();
-
-            //services.AddTransient<Func<string, IPersonService>>(
-            //    serviceProvider => key =>
-            //    {
-            //        switch (key)
-            //        {
-            //            case "p1": return serviceProvider.GetService<PersonService>();
-            //            case "p2": return serviceProvider.GetService<Person2Service>();
-            //            default: return serviceProvider.GetService<Person2Service>();
-            //        }
-            //    });
 
             services.AddTransient<MainWindow>();
         }
