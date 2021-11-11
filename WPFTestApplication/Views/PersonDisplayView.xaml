@@ -28,6 +28,5 @@
             <Label Content="NickName:"/>
             <TextBlock Text="{Binding CurrentPerson.NickName}"/>
         </StackPanel>
-        <local:TextBox Grid.Row="4" Content="{Binding SomeText}"/>
     </Grid>
 </UserControl>
